@@ -1534,9 +1534,12 @@
     }
   }
   function onEmpty() {
+    // HOW important is this? This code never gets called as
+    // Loki doesn't have 'empty' commands from the server
     initialLoadComplete = true;
 
-    window.readyForUpdates();
+    // We don't do updates with Session (yet):
+    // window.readyForUpdates();
 
     let interval = setInterval(() => {
       const view = window.owsDesktopApp.appView;
@@ -1554,6 +1557,7 @@
     //   scenarios where we're coming back from sleep, we can get offline/online events
     //   very fast, and it looks like a network blip. But we need to suppress
     //   notifications in these scenarios too. So we listen for 'reconnect' events.
+
     Whisper.Notifications.disable();
   }
   function onProgress(ev) {

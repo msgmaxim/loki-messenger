@@ -222,6 +222,9 @@ MessageReceiver.prototype.extend({
     //   });
   },
   handleRequest(request, options) {
+
+    console.log("[maxim] handleRequest");
+
     const { onSuccess, onFailure } = options;
     this.incoming = this.incoming || [];
     const lastPromise = _.last(this.incoming);
@@ -593,6 +596,7 @@ MessageReceiver.prototype.extend({
     throw new Error('Received message with no content and no legacyMessage');
   },
   handleEnvelope(envelope) {
+    // debugger;
     if (this.stoppingProcessing) {
       return Promise.resolve();
     }
@@ -803,6 +807,8 @@ MessageReceiver.prototype.extend({
         break;
       case textsecure.protobuf.Envelope.Type.UNIDENTIFIED_SENDER:
         window.log.info('received unidentified sender message');
+
+        debugger;
         promise = secretSessionCipher
           .decrypt(ciphertext.toArrayBuffer(), me)
           .then(
@@ -1408,6 +1414,8 @@ MessageReceiver.prototype.extend({
     return this.handleDataMessage(envelope, message);
   },
   handleContentMessage(envelope) {
+
+    debugger;
     return this.decrypt(envelope, envelope.content).then(plaintext => {
       if (!plaintext) {
         window.log.warn('handleContentMessage: plaintext was falsey');

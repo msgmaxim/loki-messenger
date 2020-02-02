@@ -29,6 +29,7 @@ class LokiSnodeAPI {
   }
 
   async initialiseRandomPool(seedNodes = [...window.seedNodeList]) {
+    log.info("[maxim] initialieRandomPool");
     const params = {
       limit: 20,
       active_only: true,

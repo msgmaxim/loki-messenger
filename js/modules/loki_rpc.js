@@ -154,6 +154,7 @@ const lokiFetch = async (url, options = {}, targetNode = null) => {
     }
 
     if (!response.ok) {
+      console.error("[maxim] Unknown error for url: ", url);
       throw new textsecure.HTTPError('Loki_rpc error', response);
     }
 

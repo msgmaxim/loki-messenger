@@ -33,6 +33,7 @@
 
   Whisper.Notifications = new (Backbone.Collection.extend({
     initialize() {
+      console.error("[maxim] Notifications::initialize");
       this.isEnabled = false;
       this.on('add', this.update);
       this.on('remove', this.onRemove);
@@ -48,15 +49,24 @@
       this.update = _.debounce(this.update, 1000);
     },
     update() {
+
+      console.error("[maxim] Notifications::update");
+
       if (this.lastNotification) {
         this.lastNotification.close();
         this.lastNotification = null;
       }
 
-      const { isEnabled } = this;
+      // TODO: We don't have a way (yet) to enable notifications, so we don't disable them in
+      // the first place. Investigate if this ever becomes a problem.
+      // const { isEnabled } = this;
+      const isEnabled = true;
+
       const isAppFocused = isFocused();
-      const isAudioNotificationEnabled =
-        storage.get('audio-notification') || false;
+      // const isAudioNotificationEnabled =
+      //   storage.get('audio-notification') || false;
+
+        const isAudioNotificationEnabled = true;
       const isAudioNotificationSupported = Settings.isAudioNotificationSupported();
       const isNotificationGroupingSupported = Settings.isNotificationGroupingSupported();
       const numNotifications = this.length;

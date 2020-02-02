@@ -342,6 +342,7 @@ class LokiMessageAPI {
   }
 
   async startLongPolling(numConnections, stopPolling, callback) {
+    console.log("[maxim] startLongPolling");
     this.ourSwarmNodes = {};
     let nodes = await lokiSnodeAPI.getSwarmNodesForPubKey(this.ourKey);
     if (nodes.length < numConnections) {

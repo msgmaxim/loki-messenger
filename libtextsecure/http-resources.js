@@ -57,10 +57,12 @@
 
     this.handleMessage = (message, options = {}) => {
       try {
+        console.log("[maxim] http-resources::handleMessage");
         const dataPlaintext = stringToArrayBufferBase64(message);
         const messageBuf = textsecure.protobuf.WebSocketMessage.decode(
           dataPlaintext
         );
+
         if (
           messageBuf.type === textsecure.protobuf.WebSocketMessage.Type.REQUEST
         ) {
@@ -87,6 +89,7 @@
       // This blocking call will return only when all attempts
       // at reaching snodes are exhausted or a DNS error occured
       try {
+        console.log("[maxim] pollServer");
         await server.startLongPolling(
           NUM_CONCURRENT_CONNECTIONS,
           stopPolling,
